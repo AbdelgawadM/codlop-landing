@@ -1,0 +1,103 @@
+.head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+}
+
+.title {
+  max-width: 22ch;
+}
+
+.steps {
+  display: grid;
+  gap: var(--s-6);
+  counter-reset: step;
+}
+
+.step {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+
+.n {
+  font-size: var(--text-xs);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: var(--o, left);
+  transition: transform 1200ms var(--ease-expo);
+  transition-delay: calc(var(--delay, 0ms) + 200ms);
+}
+
+:root[dir="rtl"] .rule::after {
+  transform-origin: right;
+}
+
+.step:global(.is-in) .rule::after {
+  transform: scaleX(1);
+}
+
+.stepTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-top: var(--s-2);
+}
+
+.stepText {
+  color: var(--fg-2);
+  font-size: var(--text-sm);
+  max-width: 28ch;
+}
+
+@media (min-width: 720px) {
+  .steps {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--s-5);
+  }
+}
+
+@media (max-width: 719px) {
+  .step {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "n rule"
+      "title title"
+      "text text";
+    align-items: center;
+    gap: var(--s-2) var(--s-4);
+    padding-bottom: var(--s-4);
+  }
+
+  .n {
+    grid-area: n;
+  }
+
+  .rule {
+    grid-area: rule;
+  }
+
+  .stepTitle {
+    grid-area: title;
+    margin-top: var(--s-2);
+  }
+
+  .stepText {
+    grid-area: text;
+    max-width: 40ch;
+  }
+}

@@ -1,0 +1,128 @@
+.cta {
+  --px: 0.5;
+  --py: 0.5;
+  position: relative;
+  min-height: 80svh;
+  display: grid;
+  place-items: center;
+  padding: var(--section) 0;
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--accent-fg);
+  isolation: isolate;
+  transition: background-color var(--d-slow) var(--ease-out), color var(--d-slow) var(--ease-out);
+}
+
+:root[data-theme="dark"] .cta {
+  background: var(--brand-navy);
+  color: #f3f5fa;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(60% 50% at calc(var(--px) * 100%) calc(var(--py) * 100%), rgba(255, 255, 255, 0.22), transparent 70%),
+    radial-gradient(40% 40% at calc(100% - var(--px) * 100%) calc(100% - var(--py) * 100%), rgba(255, 255, 255, 0.1), transparent 70%);
+  transition: opacity var(--d-slow) var(--ease-out);
+}
+
+:root[data-theme="dark"] .field {
+  background:
+    radial-gradient(55% 45% at calc(var(--px) * 100%) calc(var(--py) * 100%), rgba(2, 200, 240, 0.3), transparent 70%),
+    radial-gradient(40% 40% at calc(100% - var(--px) * 100%) calc(100% - var(--py) * 100%), rgba(2, 200, 240, 0.16), transparent 70%);
+}
+
+.grid {
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 96px 96px;
+  transform: perspective(1200px) rotateX(calc((var(--py) - 0.5) * -6deg)) rotateY(calc((var(--px) - 0.5) * 6deg)) translate3d(calc((var(--px) - 0.5) * -40px), calc((var(--py) - 0.5) * -40px), 0);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 80%);
+  will-change: transform;
+}
+
+.ring {
+  position: absolute;
+  z-index: -1;
+  width: min(70vw, 720px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  left: calc(var(--px) * 100% - min(35vw, 360px));
+  top: calc(var(--py) * 100% - min(35vw, 360px));
+  transition: left 1.6s var(--ease-out), top 1.6s var(--ease-out);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: var(--s-7);
+  justify-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2.4rem, 1.4rem + 5.4vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+:root[lang="ar"] .title {
+  letter-spacing: 0;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.l2 {
+  opacity: 0.72;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
+}
+
+.btnMain {
+  --btn-bg: #fff;
+  --btn-fg: #101114;
+}
+
+.btnMain::after {
+  background: #101114;
+}
+
+.btnMain:hover {
+  color: #fff;
+}
+
+:root[data-theme="dark"] .btnMain {
+  --btn-bg: var(--brand-cyan);
+  --btn-fg: var(--brand-navy);
+}
+
+.btnGhost {
+  --btn-fg: currentColor;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: inherit;
+}
+
+.btnGhost::after {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.btnGhost:hover {
+  color: inherit;
+}
